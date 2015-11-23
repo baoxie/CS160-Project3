@@ -2,4 +2,7 @@
     <string name="app_name">Tips</string>
     <string name="hello_round">Hello Round World!</string>
     <string name="hello_square">Hello Square World!</string>
+    <string name="main_menu1">drinks</string>
+    <string name="main_menu2">cleaning</string>
+    <string name="main_menu3">supplies</string>
 </resources>
