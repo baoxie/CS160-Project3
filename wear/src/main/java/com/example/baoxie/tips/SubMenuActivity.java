@@ -18,6 +18,7 @@ public class SubMenuActivity extends WearableActivity {
     private ViewFlipper submenuFlipper;
     private Button prevButton;
     private Button nextButton;
+    private Button mainButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,13 +31,13 @@ public class SubMenuActivity extends WearableActivity {
         submenuFlipper = (ViewFlipper) findViewById(R.id.submenuflipper);
         prevButton = (Button) findViewById(R.id.prev_button);
         nextButton = (Button) findViewById(R.id.next_button);
+        mainButton = (Button) findViewById(R.id.main_button);
 
         // Font path
         String fontPath = "fonts/proximanova_extrabold.ttf";
         Typeface tf = Typeface.createFromAsset(getAssets(), fontPath);
 
         // Populate ViewFlipper with list of drink-recipes/cleaning/supplies
-//        if (drinks != null) {
         for (String item : drinks) {
             TextView tv = new TextView(SubMenuActivity.this);
             tv.setText(item);
@@ -71,6 +72,13 @@ public class SubMenuActivity extends WearableActivity {
             }
         });
 
+        mainButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SubMenuActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     // animation effect: http://www.inter-fuser.com/2009/07/android-transistions-slide-in-and-slide.html

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,28 +8,43 @@
 
 
     <Button
-        android:id="@+id/prev_button"
-        android:layout_width="30dp"
-        android:layout_height="46dp"
-        android:background="@drawable/prev"
-        android:gravity="center_vertical"/>
-
-    <Button
-        android:id="@+id/next_button"
-        android:layout_width="30dp"
-        android:layout_height="46dp"
-        android:background="@drawable/next"
-        android:layout_marginStart="170dp"
-        android:gravity="center_vertical"/>
-
-    <ViewFlipper
+        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/submenuflipper"
-        android:layout_alignTop="@+id/prev_button"
-        android:layout_toEndOf="@+id/prev_button">
+        android:text="back"
+        android:id="@+id/main_button"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="-70dp"
+        android:layout_marginBottom="30dp"/>
 
-    </ViewFlipper>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/prev_button"
+            android:layout_width="30dp"
+            android:layout_height="46dp"
+            android:background="@drawable/prev"
+            android:gravity="center_vertical"/>
+
+        <ViewFlipper
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/submenuflipper"
+            android:layout_alignTop="@+id/prev_button"
+            android:layout_toEndOf="@+id/prev_button">
+
+        </ViewFlipper>
+
+        <Button
+            android:id="@+id/next_button"
+            android:layout_width="30dp"
+            android:layout_height="46dp"
+            android:background="@drawable/next"
+            android:gravity="center_vertical"/>
+    </LinearLayout>
 
 
-</RelativeLayout>
+</LinearLayout>
