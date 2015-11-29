@@ -73,13 +73,21 @@ public class MainActivity extends WearableActivity implements View.OnClickListen
                     "Cafe Latte",
                     "Cappuccino",
             };
-            Intent intent = new Intent(MainActivity.this, SubMenuActivity.class);
+            Intent intent = new Intent(MainActivity.this, DrinksActivity.class);
             intent.putExtra("drinks", drinks);
             startActivity(intent);
             // get http for list of drinks + new intent for submenu
         } else if (selected.equals("cleaning")) {
             // get http for list of cleaning + new intent for submenu
         } else if (selected.equals("supplies")) {
+            String[] supplies = {
+                    "Cups",
+                    "Coffee Beans",
+                    "Straws",
+            };
+            Intent intent = new Intent(MainActivity.this, SuppliesActivity.class);
+            intent.putExtra("supplies", supplies);
+            startActivity(intent);
             // get http for list of cleaning + new intent for submenu
         }
         Toast.makeText(getApplicationContext(), selected,
