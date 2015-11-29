@@ -89,7 +89,15 @@ public class DrinksActivity extends WearableActivity implements View.OnClickList
         String selectedDrink = tv.getText().toString();
         // hardcoding for now ; get recipe for respective drink
         if (selectedDrink.equals("Cappuccino")) { // probably want convert cases here (so text is case insensitive)
+
+            String[] steps = {
+                    "steam milk",
+                    "whip milk",
+                    "pour coffee",
+                    "mix in milk"
+            };
             Intent intent = new Intent(DrinksActivity.this, RecipeActivity.class);
+            intent.putExtra("steps", steps);
             startActivity(intent);
             // get http for list of drinks + new intent for submenu
         }

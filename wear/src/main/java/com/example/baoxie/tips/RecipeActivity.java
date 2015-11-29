@@ -17,11 +17,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 public class RecipeActivity extends WearableActivity {
 
-    private ViewFlipper submenuFlipper;
+    private ViewFlipper recipeFlipper;
     private Button prevButton;
     private Button nextButton;
     private Button mainButton;
@@ -38,10 +39,10 @@ public class RecipeActivity extends WearableActivity {
 
         Intent intent = getIntent();
         //hardcoded for now
-        String [] steps = {"steam milk", "whip milk", "pour coffee", "mix in milk"};
+        String [] steps = intent.getStringArrayExtra("steps");
 //        have toast to say like lowfat milk for 'customizable drinks'
 
-        submenuFlipper = (ViewFlipper) findViewById(R.id.submenuflipper);
+        recipeFlipper = (ViewFlipper) findViewById(R.id.submenuflipper);
         prevButton = (Button) findViewById(R.id.prev_button);
         nextButton = (Button) findViewById(R.id.next_button);
         mainButton = (Button) findViewById(R.id.main_button);
@@ -75,7 +76,7 @@ public class RecipeActivity extends WearableActivity {
             iv.setLayoutParams(params);
             lv.addView(tv);
             lv.addView(iv);
-            submenuFlipper.addView(lv,
+            recipeFlipper.addView(lv,
                     new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                             ViewGroup.LayoutParams.MATCH_PARENT));
         }
@@ -84,18 +85,18 @@ public class RecipeActivity extends WearableActivity {
         prevButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                submenuFlipper.setInAnimation(inFromLeftAnimation());
-                submenuFlipper.setOutAnimation(outToRightAnimation());
-                submenuFlipper.showPrevious();
+                recipeFlipper.setInAnimation(inFromLeftAnimation());
+                recipeFlipper.setOutAnimation(outToRightAnimation());
+                recipeFlipper.showPrevious();
             }
         });
 
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                submenuFlipper.setInAnimation(inFromRightAnimation());
-                submenuFlipper.setOutAnimation(outToLeftAnimation());
-                submenuFlipper.showNext();
+                recipeFlipper.setInAnimation(inFromRightAnimation());
+                recipeFlipper.setOutAnimation(outToLeftAnimation());
+                recipeFlipper.showNext();
             }
         });
 
@@ -120,7 +121,7 @@ public class RecipeActivity extends WearableActivity {
             mDotsText[i].setTextSize(50);
             mDotsText[i].setTypeface(null, Typeface.BOLD);
             mDotsText[i].setTextColor(android.graphics.Color.GRAY);
-            Log.i("dots", "creating dot scrolling");
+            //Log.i("dots", "creating dot scrolling");
             mDotsLayout.addView(mDotsText[i]);
 //            mDotsLayout.getChildAt(i).setVisibility(View.VISIBLE);
         }
@@ -128,12 +129,17 @@ public class RecipeActivity extends WearableActivity {
         for (int i = 0; i < mDotsCount; i++) {
             mDotsText[i]
                     .setTextColor(Color.GRAY);
-            Log.i("dots", "coloring dots grey");
+            //Log.i("dots", "coloring dots grey");
         }
 
         mDotsText[mDotsCurr]
                 .setTextColor(Color.WHITE);
-        Log.i("dots", "coloring dots white");
+        //Log.i("dots", "coloring dots white");
+
+        if (mDotsCurr == 0) {
+            Toast.makeText(getApplicationContext(), "Low Fat Milk",
+                    Toast.LENGTH_LONG).show();
+        }
 
     }
 
@@ -152,12 +158,16 @@ public class RecipeActivity extends WearableActivity {
         for (int i = 0; i < mDotsCount; i++) {
             mDotsText[i]
                     .setTextColor(Color.GRAY);
-            Log.i("dots", "coloring dots grey");
+            //Log.i("dots", "coloring dots grey");
         }
 
         mDotsText[mDotsCurr]
                 .setTextColor(Color.WHITE);
-        Log.i("dots", "coloring dots white");
+        //Log.i("dots", "coloring dots white");
+        if (mDotsCurr == 0) {
+                Toast.makeText(getApplicationContext(), "Low Fat Milk",
+                        Toast.LENGTH_LONG).show();
+        }
         return inFromRight;
     }
 
@@ -184,7 +194,7 @@ public class RecipeActivity extends WearableActivity {
         for (int i = 0; i < mDotsCount; i++) {
             mDotsText[i]
                     .setTextColor(Color.GRAY);
-            Log.i("dots", "coloring dots grey");
+            //Log.i("dots", "coloring dots grey");
         }
 
         mDotsText[mDotsCurr]
@@ -201,5 +211,4 @@ public class RecipeActivity extends WearableActivity {
         outtoRight.setInterpolator(new AccelerateInterpolator());
         return outtoRight;
     }
-
 }
