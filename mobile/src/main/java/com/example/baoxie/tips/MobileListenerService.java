@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.wearable.MessageEvent;
 import com.google.android.gms.wearable.WearableListenerService;
@@ -36,6 +37,8 @@ public class MobileListenerService extends WearableListenerService {
     @Override
     public void onMessageReceived(MessageEvent messageEvent) {
         Log.i(TAG, "Message to change the picture...");
+        Toast.makeText(getApplicationContext(), "Received notification from watch; you need to restock [product].",
+                Toast.LENGTH_LONG).show();
         if( messageEvent.getPath().equalsIgnoreCase( RESTOCK ) ) {
             String value = new String(messageEvent.getData(), StandardCharsets.UTF_8);
             restockNotify(value);

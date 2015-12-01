@@ -27,6 +27,7 @@ public class SupplyOptionsActivity extends WearableActivity {
         locateButton = (Button) findViewById(R.id.locate_button);
 
          mApiClient = new GoogleApiClient.Builder( this )
+        mApiClient = new GoogleApiClient.Builder( this )
                 .addApi( Wearable.API )
                 .addConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
                     @Override
@@ -47,6 +48,7 @@ public class SupplyOptionsActivity extends WearableActivity {
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "Product will be restocked.",
                         Toast.LENGTH_LONG).show();
+                sendRestockMessage();
             }
         });
 
@@ -59,7 +61,7 @@ public class SupplyOptionsActivity extends WearableActivity {
         });
     }
 
-     public void sendRestockMessage() {
+    public void sendRestockMessage() {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -73,3 +75,4 @@ public class SupplyOptionsActivity extends WearableActivity {
         }).start();
      }
 }
+
