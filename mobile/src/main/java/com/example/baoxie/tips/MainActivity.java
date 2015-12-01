@@ -2,6 +2,8 @@ package com.example.baoxie.tips;
 
 import android.app.Activity;
 import android.graphics.Color;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,5 +52,11 @@ public class MainActivity extends Activity {
         };
         mainMenu.setAdapter(adapter);
 
+        // SAM'S TEST CODE TO CREATE AN OBJECT
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+//            new PostToServer().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+//        } else {
+//            new PostToServer().execute();
+//        }
     }
 }
