@@ -1,5 +1,5 @@
 # CS160-Project3
-Group 30 (30Rock): Charles Lai, Vashisht Madhavan, Bao Xie, Sam Paul, Rachel Huang
+Group 30 (30Watch): Charles Lai, Vashisht Madhavan, Bao Xie, Sam Paul, Rachel Huang
 
 Milestone 1: 
 
