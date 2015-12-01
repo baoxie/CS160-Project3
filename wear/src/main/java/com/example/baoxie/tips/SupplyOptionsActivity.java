@@ -63,7 +63,7 @@ public class SupplyOptionsActivity extends WearableActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String temp = "Product needs to be restocked."
+                String temp = "Product needs to be restocked.";
                 NodeApi.GetConnectedNodesResult nodes = Wearable.NodeApi.getConnectedNodes(mApiClient).await();
                 for (Node node : nodes.getNodes()) {
                     MessageApi.SendMessageResult result = Wearable.MessageApi.sendMessage(
