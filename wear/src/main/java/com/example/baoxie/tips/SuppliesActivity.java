@@ -13,12 +13,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
-public class SuppliesActivity extends WearableActivity {
+public class SuppliesActivity extends WearableActivity implements View.OnClickListener {
 
     private ViewFlipper submenuFlipper;
     private Button prevButton;
     private Button nextButton;
     private Button mainButton;
+    private Button helpButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,19 +27,20 @@ public class SuppliesActivity extends WearableActivity {
         setContentView(R.layout.activity_submenu);
 
         Intent intent = getIntent();
-        String [] drinks = intent.getStringArrayExtra("drinks");
+        String [] supplies = intent.getStringArrayExtra("supplies");
 
         submenuFlipper = (ViewFlipper) findViewById(R.id.submenuflipper);
         prevButton = (Button) findViewById(R.id.prev_button);
         nextButton = (Button) findViewById(R.id.next_button);
         mainButton = (Button) findViewById(R.id.main_button);
+        helpButton = (Button) findViewById(R.id.help_button);
 
         // Font path
         String fontPath = "fonts/proximanova_extrabold.ttf";
         Typeface tf = Typeface.createFromAsset(getAssets(), fontPath);
 
         // Populate ViewFlipper with list of drink-recipes/cleaning/supplies
-        for (String item : drinks) {
+        for (String item : supplies) {
             TextView tv = new TextView(SuppliesActivity.this);
             tv.setText(item);
             tv.setTypeface(tf);
@@ -79,6 +81,21 @@ public class SuppliesActivity extends WearableActivity {
                 startActivity(intent);
             }
         });
+
+        helpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SuppliesActivity.this, QuickHelpActivity.class);
+                startActivity(intent);
+            }
+        });
+        submenuFlipper.setOnClickListener(this);
+
+    }
+
+    public void onClick(View v) {
+        Intent intent = new Intent(SuppliesActivity.this, SupplyOptionsActivity.class);
+        startActivity(intent);
     }
 
     // animation effect: http://www.inter-fuser.com/2009/07/android-transistions-slide-in-and-slide.html

@@ -5,4 +5,5 @@
     <string name="main_menu1">drinks</string>
     <string name="main_menu2">cleaning</string>
     <string name="main_menu3">supplies</string>
+    <string name="help_msg">please confirm you would like to call the manager</string>
 </resources>

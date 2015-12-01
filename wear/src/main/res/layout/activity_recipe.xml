@@ -10,9 +10,9 @@
 
     <Button
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="back"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:background="@drawable/home"
         android:id="@+id/main_button"
         android:layout_gravity="center_horizontal" />
 

@@ -20,6 +20,7 @@ public class DrinksActivity extends WearableActivity implements View.OnClickList
     private Button prevButton;
     private Button nextButton;
     private Button mainButton;
+    private Button helpButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,7 @@ public class DrinksActivity extends WearableActivity implements View.OnClickList
         prevButton = (Button) findViewById(R.id.prev_button);
         nextButton = (Button) findViewById(R.id.next_button);
         mainButton = (Button) findViewById(R.id.main_button);
+        helpButton = (Button) findViewById(R.id.help_button);
 
         // Font path
         String fontPath = "fonts/proximanova_extrabold.ttf";
@@ -77,6 +79,14 @@ public class DrinksActivity extends WearableActivity implements View.OnClickList
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(DrinksActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        helpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DrinksActivity.this, QuickHelpActivity.class);
                 startActivity(intent);
             }
         });

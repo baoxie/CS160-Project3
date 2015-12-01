@@ -199,7 +199,11 @@ public class RecipeActivity extends WearableActivity {
 
         mDotsText[mDotsCurr]
                 .setTextColor(Color.WHITE);
-        Log.i("dots", "coloring dots white");
+        //Log.i("dots", "coloring dots white");
+        if (mDotsCurr == 0) {
+            Toast.makeText(getApplicationContext(), "Low Fat Milk",
+                    Toast.LENGTH_LONG).show();
+        }
         return inFromLeft;
     }
 
