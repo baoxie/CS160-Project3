@@ -4,16 +4,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!--<ListView-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="fill_parent"-->
-        <!--android:id="@+id/main_menu_list" />-->
-
     <Button
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/mainscreen_button"
-        android:background="@drawable/static_mainscreen"
+        android:id="@+id/drinks_button"
+        android:background="@drawable/static_drinks"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true" />
 </RelativeLayout>

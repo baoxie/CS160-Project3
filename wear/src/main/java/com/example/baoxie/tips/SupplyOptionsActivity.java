@@ -26,8 +26,8 @@ public class SupplyOptionsActivity extends WearableActivity {
         restockButton = (Button) findViewById(R.id.restock_button);
         locateButton = (Button) findViewById(R.id.locate_button);
 
-        mApiClient = new GoogleApiClient.Builder( this )
-                .addApi( Wearable.API )
+        mApiClient = new GoogleApiClient.Builder(this)
+                .addApi(Wearable.API)
                 .addConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
                     @Override
                     public void onConnected(Bundle connectionHint) {
