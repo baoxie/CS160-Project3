@@ -3,6 +3,8 @@ package com.example.baoxie.tips;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,5 +65,13 @@ public class MainActivity extends Activity {
 //        };
 //        mainMenu.setAdapter(adapter);
 
+        // SAM'S TEST CODE TO CREATE AN OBJECT
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            new TalkToServer().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, "GET", "foods");
+            new TalkToServer().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, "POST", "drinks", "Very Iced Tea");
+        } else {
+            new TalkToServer().execute("GET", "foods");
+            new TalkToServer().execute("POST", "drinks", "Very Iced Tea");
+        }
     }
 }
