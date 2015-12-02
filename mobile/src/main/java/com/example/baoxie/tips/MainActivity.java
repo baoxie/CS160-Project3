@@ -53,10 +53,12 @@ public class MainActivity extends Activity {
         mainMenu.setAdapter(adapter);
 
         // SAM'S TEST CODE TO CREATE AN OBJECT
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-//            new PostToServer().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-//        } else {
-//            new PostToServer().execute();
-//        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            new TalkToServer().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, "GET", "foods");
+            new TalkToServer().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, "POST", "drinks", "Very Iced Tea");
+        } else {
+            new TalkToServer().execute("GET", "foods");
+            new TalkToServer().execute("POST", "drinks", "Very Iced Tea");
+        }
     }
 }
