@@ -56,6 +56,8 @@ public class SupplyOptionsActivity extends WearableActivity {
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "Start new intent to locate product.",
                         Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(SupplyOptionsActivity.this, SupplyLocateActivity.class);
+                startActivity(intent);
             }
         });
     }
