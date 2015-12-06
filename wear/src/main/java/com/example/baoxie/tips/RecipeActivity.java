@@ -4,9 +4,15 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.os.Debug;
 import android.support.wearable.activity.WearableActivity;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
@@ -20,12 +26,25 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
-public class RecipeActivity extends WearableActivity {
+public class RecipeActivity extends WearableActivity implements
+        SensorEventListener {
+
+    private static final String DEBUG_TAG = "Gestures";
 
     private ViewFlipper recipeFlipper;
     private Button prevButton;
     private Button nextButton;
     private Button mainButton;
+
+    private SensorManager mSensorManager;
+    private Sensor mSensor;
+    double xValue = 0;
+    double yValue = 9.77622;
+    double zValue = 0.813417;
+
+    private long lastTime;
+
+    private static final int LAST_SHAKE_TIME = 200;
 
     static TextView mDotsText[];
     private int mDotsCount;
@@ -80,7 +99,6 @@ public class RecipeActivity extends WearableActivity {
                     new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                             ViewGroup.LayoutParams.MATCH_PARENT));
         }
-//        }
 
         prevButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -141,6 +159,12 @@ public class RecipeActivity extends WearableActivity {
                     Toast.LENGTH_LONG).show();
         }
 
+                       /* Initialize the sensor. */
+        mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        mSensorManager.registerListener(this, mSensor, SensorManager.SENSOR_DELAY_NORMAL);
+
+        lastTime = System.currentTimeMillis();
     }
 
     // animation effect: http://www.inter-fuser.com/2009/07/android-transistions-slide-in-and-slide.html
@@ -165,8 +189,8 @@ public class RecipeActivity extends WearableActivity {
                 .setTextColor(Color.WHITE);
         //Log.i("dots", "coloring dots white");
         if (mDotsCurr == 0) {
-                Toast.makeText(getApplicationContext(), "Low Fat Milk",
-                        Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Low Fat Milk",
+                    Toast.LENGTH_LONG).show();
         }
         return inFromRight;
     }
@@ -214,5 +238,71 @@ public class RecipeActivity extends WearableActivity {
         outtoRight.setDuration(500);
         outtoRight.setInterpolator(new AccelerateInterpolator());
         return outtoRight;
+    }
+
+//    http://stackoverflow.com/questions/2317428/android-i-want-to-shake-it
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+
+        long now = System.currentTimeMillis();
+
+        double newX = event.values[0];
+        double newY = event.values[1];
+        double newZ = event.values[2];
+        double deltaX = Math.abs(newX - xValue);
+        double deltaY = Math.abs(newY - yValue);
+        double deltaZ = Math.abs(newZ - zValue);
+//        Log.d("String", "x:" + xValue + "; y:" + yValue + "; z:" + zValue);
+//        if (deltaX >= 4.0 && deltaY >= 3 && deltaZ >= 1.7 ) {
+//            Toast.makeText(getApplicationContext(), "you are shaking the watch!!!",
+//                    Toast.LENGTH_LONG).show();
+            //actually send the message to the watch
+//        }
+
+        long diff = now - lastTime;
+
+        if (deltaZ <= 10 && deltaZ >= 3 && deltaX <= 3 && deltaY <= 3 && diff > LAST_SHAKE_TIME) {
+            Log.i(DEBUG_TAG, "Z plane");
+            Log.i("String", "x:" + xValue + "; y:" + yValue + "; z:" + zValue);
+            recipeFlipper.setInAnimation(inFromLeftAnimation());
+            recipeFlipper.setOutAnimation(outToRightAnimation());
+            recipeFlipper.showPrevious();
+            resetShakeParameters();
+
+        }
+
+        if (deltaY <= 10 && deltaY >= 3 && deltaX <=3 && deltaZ <= 3 && diff > LAST_SHAKE_TIME) {
+            Log.i(DEBUG_TAG, "Y plane");
+            Log.i("String", "x:" + xValue + "; y:" + yValue + "; z:" + zValue);
+            recipeFlipper.setInAnimation(inFromRightAnimation());
+            recipeFlipper.setOutAnimation(outToLeftAnimation());
+            recipeFlipper.showNext();
+            resetShakeParameters();
+
+        }
+        xValue = newX;
+        yValue = newY;
+        zValue = newZ;
+    }
+
+    private void resetShakeParameters() {
+        lastTime = System.currentTimeMillis();
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mSensorManager.registerListener(this, mSensor, SensorManager.SENSOR_DELAY_NORMAL);
+    }
+
+    @Override
+    protected void onPause() {
+        mSensorManager.unregisterListener(this);
+        super.onPause();
     }
 }
