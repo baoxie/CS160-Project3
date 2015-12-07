@@ -31,34 +31,38 @@
     </LinearLayout>
 
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+    <!--<LinearLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal">-->
 
-        <Button
-            android:id="@+id/prev_button"
-            android:layout_width="30dp"
-            android:layout_height="46dp"
-            android:background="@drawable/prev"
-            android:gravity="center_vertical"/>
+        <!--<Button-->
+            <!--android:id="@+id/prev_button"-->
+            <!--android:layout_width="30dp"-->
+            <!--android:layout_height="46dp"-->
+            <!--android:background="@drawable/prev"-->
+            <!--android:gravity="center_vertical"/>-->
 
-        <ViewFlipper
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/submenuflipper"
-            android:layout_alignTop="@+id/prev_button"
-            android:layout_toEndOf="@+id/prev_button">
+        <!--<ViewFlipper-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/submenuflipper"-->
+            <!--android:layout_alignTop="@+id/prev_button"-->
+            <!--android:layout_toEndOf="@+id/prev_button">-->
 
-        </ViewFlipper>
+        <!--</ViewFlipper>-->
 
-        <Button
-            android:id="@+id/next_button"
-            android:layout_width="30dp"
-            android:layout_height="46dp"
-            android:background="@drawable/next"
-            android:gravity="center_vertical"/>
-    </LinearLayout>
+        <!--<Button-->
+            <!--android:id="@+id/next_button"-->
+            <!--android:layout_width="30dp"-->
+            <!--android:layout_height="46dp"-->
+            <!--android:background="@drawable/next"-->
+            <!--android:gravity="center_vertical"/>-->
+    <!--</LinearLayout>-->
 
-
+        <ListView
+            android:id="@android:id/list"
+            android:layout_width="150dp"
+            android:layout_height="150dp">
+        </ListView>
 </LinearLayout>
