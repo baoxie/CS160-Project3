@@ -35,6 +35,7 @@ public class RecipeActivity extends WearableActivity implements
     private Button prevButton;
     private Button nextButton;
     private Button mainButton;
+    private Button helpButton;
 
     private SensorManager mSensorManager;
     private Sensor mSensor;
@@ -44,7 +45,7 @@ public class RecipeActivity extends WearableActivity implements
 
     private long lastTime;
 
-    private static final int LAST_SHAKE_TIME = 200;
+    private static final int LAST_SHAKE_TIME = 1000;
 
     static TextView mDotsText[];
     private int mDotsCount;
@@ -65,6 +66,7 @@ public class RecipeActivity extends WearableActivity implements
         prevButton = (Button) findViewById(R.id.prev_button);
         nextButton = (Button) findViewById(R.id.next_button);
         mainButton = (Button) findViewById(R.id.main_button);
+        helpButton = (Button) findViewById(R.id.help_button);
 
         // Font path
         String fontPath = "fonts/proximanova_extrabold.ttf";
@@ -78,10 +80,21 @@ public class RecipeActivity extends WearableActivity implements
                     LinearLayout.LayoutParams.WRAP_CONTENT);
             lv.setOrientation(LinearLayout.VERTICAL);
             TextView tv = new TextView(RecipeActivity.this);
-            ImageView iv = new ImageView(RecipeActivity.this);
-            iv.setImageResource(R.drawable.coffee_temp);
+            AnimatedGifView iv;
+            //AnimatedGifView iv = new AnimatedGifView(RecipeActivity.this);
+            // steam milk", "whip milk", "pour coffee", "mix in milk"
+            if (item.equals("steam milk")) {
+                iv = new AnimatedGifView(RecipeActivity.this, "steam");
+            } else if (item.equals("whip milk")) {
+                iv = new AnimatedGifView(RecipeActivity.this, "stir");
+            } else if (item.equals("pour coffee")) {
+                iv = new AnimatedGifView(RecipeActivity.this, "pour");
+            } else {
+                iv = new AnimatedGifView(RecipeActivity.this, "stir");
+            }
             tv.setText(item);
             tv.setTypeface(tf);
+            tv.setTextColor(Color.parseColor("#FFFFFF"));
             tv.setTextSize(25);
             if (item.length() > 9) {
                 tv.setPadding(11, 10, 0, 0);
@@ -125,7 +138,13 @@ public class RecipeActivity extends WearableActivity implements
                 startActivity(intent);
             }
         });
-
+        helpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RecipeActivity.this, QuickHelpActivity.class);
+                startActivity(intent);
+            }
+        });
         mDotsLayout = (LinearLayout)findViewById(R.id.image_count);
 
         mDotsCount = steps.length;
@@ -156,7 +175,7 @@ public class RecipeActivity extends WearableActivity implements
 
         if (mDotsCurr == 0) {
             Toast.makeText(getApplicationContext(), "Low Fat Milk",
-                    Toast.LENGTH_LONG).show();
+                    Toast.LENGTH_SHORT).show();
         }
 
                        /* Initialize the sensor. */
@@ -190,7 +209,7 @@ public class RecipeActivity extends WearableActivity implements
         //Log.i("dots", "coloring dots white");
         if (mDotsCurr == 0) {
             Toast.makeText(getApplicationContext(), "Low Fat Milk",
-                    Toast.LENGTH_LONG).show();
+                    Toast.LENGTH_SHORT).show();
         }
         return inFromRight;
     }
@@ -245,23 +264,21 @@ public class RecipeActivity extends WearableActivity implements
     public void onSensorChanged(SensorEvent event) {
 
         long now = System.currentTimeMillis();
-
+        long diff = now - lastTime;
         double newX = event.values[0];
         double newY = event.values[1];
         double newZ = event.values[2];
         double deltaX = Math.abs(newX - xValue);
         double deltaY = Math.abs(newY - yValue);
         double deltaZ = Math.abs(newZ - zValue);
-//        Log.d("String", "x:" + xValue + "; y:" + yValue + "; z:" + zValue);
+        //Log.d("String", "x:" + xValue + "; y:" + yValue + "; z:" + zValue);
 //        if (deltaX >= 4.0 && deltaY >= 3 && deltaZ >= 1.7 ) {
 //            Toast.makeText(getApplicationContext(), "you are shaking the watch!!!",
 //                    Toast.LENGTH_LONG).show();
-            //actually send the message to the watch
+//            //actually send the message to the watch
 //        }
 
-        long diff = now - lastTime;
-
-        if (deltaZ <= 10 && deltaZ >= 3 && deltaX <= 3 && deltaY <= 3 && diff > LAST_SHAKE_TIME) {
+        if ( diff >= LAST_SHAKE_TIME && deltaZ >= 5 && deltaX <= 2.2 && deltaY <= 2.2) {
             Log.i(DEBUG_TAG, "Z plane");
             Log.i("String", "x:" + xValue + "; y:" + yValue + "; z:" + zValue);
             recipeFlipper.setInAnimation(inFromLeftAnimation());
@@ -271,7 +288,7 @@ public class RecipeActivity extends WearableActivity implements
 
         }
 
-        if (deltaY <= 10 && deltaY >= 3 && deltaX <=3 && deltaZ <= 3 && diff > LAST_SHAKE_TIME) {
+        if ( deltaY >= 4.8  && deltaX <= 2.1 && deltaZ <= 2.1) {
             Log.i(DEBUG_TAG, "Y plane");
             Log.i("String", "x:" + xValue + "; y:" + yValue + "; z:" + zValue);
             recipeFlipper.setInAnimation(inFromRightAnimation());

@@ -18,7 +18,7 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:textColor="@color/text_color"
-            android:paddingLeft="68dp"
+            android:paddingLeft="78dp"
             android:paddingTop="45dp"
             android:textSize="30sp"
             android:background="@drawable/main_menu1"
@@ -60,7 +60,7 @@
         android:layout_width="30dp"
         android:layout_height="46dp"
         android:background="@drawable/next"
-        android:layout_marginStart="170dp"
+        android:layout_marginStart="190dp"
         android:layout_centerVertical="true"/>
 
 </RelativeLayout>

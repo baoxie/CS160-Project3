@@ -3,18 +3,32 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/gray"
+    android:background="@color/bg_color"
     android:gravity="center"
     android:weightSum="1">
 
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:background="@drawable/home"
-        android:id="@+id/main_button"
-        android:layout_gravity="center_horizontal" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/home"
+            android:id="@+id/main_button"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginRight="10dp"/>
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/help"
+            android:id="@+id/help_button"
+            android:layout_gravity="center_horizontal" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -26,16 +40,14 @@
             android:id="@+id/prev_button"
             android:layout_width="30dp"
             android:layout_height="46dp"
-            android:background="@drawable/prev"
+            android:background="@color/bg_color"
             android:layout_marginTop="35dp"
             android:gravity="center_vertical"/>
 
         <ViewFlipper
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/submenuflipper"
-            android:layout_alignTop="@+id/prev_button"
-            android:layout_toEndOf="@+id/prev_button">
+            android:id="@+id/submenuflipper">
 
         </ViewFlipper>
 
@@ -43,9 +55,10 @@
             android:id="@+id/next_button"
             android:layout_width="30dp"
             android:layout_height="46dp"
-            android:background="@drawable/next"
+            android:background="@color/bg_color"
             android:layout_marginTop="35dp"
             android:gravity="center_vertical"/>
+
     </LinearLayout>
 
     <LinearLayout android:id="@+id/image_count"

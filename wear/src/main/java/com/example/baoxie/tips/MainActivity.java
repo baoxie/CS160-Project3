@@ -70,8 +70,8 @@ public class MainActivity extends WearableActivity implements View.OnClickListen
         if (selected.equals("drinks")) {
             String[] drinks = {
                     "Espresso",
-                    "Cafe Latte",
-                    "Cappuccino",
+                    "Coffee",
+                    "Tea",
             };
             Intent intent = new Intent(MainActivity.this, DrinksActivity.class);
             intent.putExtra("drinks", drinks);
@@ -90,8 +90,8 @@ public class MainActivity extends WearableActivity implements View.OnClickListen
             startActivity(intent);
             // get http for list of cleaning + new intent for submenu
         }
-        Toast.makeText(getApplicationContext(), selected,
-                Toast.LENGTH_LONG).show();
+        //Toast.makeText(getApplicationContext(), selected,
+        //        Toast.LENGTH_LONG).show();
     }
 
 

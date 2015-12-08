@@ -11,4 +11,5 @@
     <color name="selector1">#A0D0DE</color>
     <color name="selector2">#C8B9AB</color>
     <color name="text_color">#343434</color>
+    <color name="bg_color">#83c5bf</color>
 </resources>

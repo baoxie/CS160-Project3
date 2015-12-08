@@ -11,8 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="-60dp"
-        android:layout_marginBottom="30dp">
+        android:paddingBottom="50dp">
         <Button
             style="?android:attr/buttonStyleSmall"
             android:layout_width="24dp"
@@ -20,7 +19,7 @@
             android:background="@drawable/home"
             android:id="@+id/main_button"
             android:layout_gravity="center_horizontal"
-            android:layout_marginRight="10dp"/>
+            android:layout_marginRight="10dp" />
         <Button
             style="?android:attr/buttonStyleSmall"
             android:layout_width="24dp"
@@ -34,21 +33,24 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:weightSum="1">
 
         <Button
             android:id="@+id/prev_button"
             android:layout_width="30dp"
             android:layout_height="46dp"
             android:background="@drawable/prev"
-            android:gravity="center_vertical"/>
+            android:gravity="center_vertical"
+            android:layout_weight="0.25"/>
 
         <ViewFlipper
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:id="@+id/locateflipper"
             android:layout_alignTop="@+id/prev_button"
-            android:layout_toEndOf="@+id/prev_button">
+            android:layout_toEndOf="@+id/prev_button"
+            android:layout_weight="0.5">
 
         </ViewFlipper>
 
@@ -57,7 +59,8 @@
             android:layout_width="30dp"
             android:layout_height="46dp"
             android:background="@drawable/next"
-            android:gravity="center_vertical"/>
+            android:gravity="center_vertical"
+            android:layout_weight="0.25"/>
     </LinearLayout>
 
     <LinearLayout android:id="@+id/image_count"

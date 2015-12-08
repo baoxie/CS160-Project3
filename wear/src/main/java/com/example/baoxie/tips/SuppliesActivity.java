@@ -107,13 +107,11 @@ public class SuppliesActivity extends WearableActivity implements View.OnClickLi
         mainView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String selected = (String)mainView.getItemAtPosition(position);
-                if(selected.equals("Cappuccino")){
-                    Intent intent = new Intent(SuppliesActivity.this,SupplyOptionsActivity.class);
-                    startActivity(intent);
-                }
-
+                String selected = (String) mainView.getItemAtPosition(position);
+                Intent intent = new Intent(SuppliesActivity.this, SupplyOptionsActivity.class);
+                startActivity(intent);
             }
+
         });
 
     }
