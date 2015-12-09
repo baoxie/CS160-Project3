@@ -1,6 +1,7 @@
 package com.example.baoxie.tips;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.wearable.activity.WearableActivity;
 import android.view.View;
@@ -26,6 +27,16 @@ public class SupplyOptionsActivity extends WearableActivity {
 
         restockButton = (Button) findViewById(R.id.restock_button);
         locateButton = (Button) findViewById(R.id.locate_button);
+
+        // Font path
+        String fontPath = "fonts/proximanova_extrabold.ttf";
+        Typeface tf = Typeface.createFromAsset(getAssets(), fontPath);
+
+        restockButton.setTypeface(tf);
+        restockButton.setTextSize(25);
+
+        locateButton.setTypeface(tf);
+        locateButton.setTextSize(25);
 
         mApiClient = new GoogleApiClient.Builder( this )
                 .addApi( Wearable.API )

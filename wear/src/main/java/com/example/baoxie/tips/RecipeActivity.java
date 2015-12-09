@@ -83,16 +83,20 @@ public class RecipeActivity extends WearableActivity implements
             AnimatedGifView iv;
             //AnimatedGifView iv = new AnimatedGifView(RecipeActivity.this);
             // steam milk", "whip milk", "pour coffee", "mix in milk"
-            if (item.equals("steam milk")) {
-                iv = new AnimatedGifView(RecipeActivity.this, "steam");
-            } else if (item.equals("whip milk")) {
+            String instruction = item.toLowerCase();
+            if (instruction.contains("shake")) {
+                iv = new AnimatedGifView(RecipeActivity.this, "shake");
+            } else if (instruction.contains("stir") || instruction.contains("mix") || instruction.contains("whip")) {
                 iv = new AnimatedGifView(RecipeActivity.this, "stir");
-            } else if (item.equals("pour coffee")) {
+            } else if (instruction.contains("pour")) {
                 iv = new AnimatedGifView(RecipeActivity.this, "pour");
             } else {
-                iv = new AnimatedGifView(RecipeActivity.this, "stir");
+                iv = new AnimatedGifView(RecipeActivity.this, "steam");
             }
             tv.setText(item);
+            //tv.setMaxWidth(150);
+            //tv.setMaxLines(3);
+            //tv.setLineSpacing(-2,1);
             tv.setTypeface(tf);
             tv.setTextColor(Color.parseColor("#FFFFFF"));
             tv.setTextSize(25);

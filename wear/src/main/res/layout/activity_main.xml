@@ -9,6 +9,15 @@
     tools:deviceIds="wear_round"
     android:background="@color/gray">
 
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:background="@drawable/help"
+        android:id="@+id/help_button"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="10dp"/>
+
     <ViewFlipper
         android:id="@+id/mainmenuflipper"
         android:layout_width="wrap_content"

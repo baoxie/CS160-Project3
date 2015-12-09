@@ -53,7 +53,6 @@ public class SupplyLocateActivity extends WearableActivity {
                 "Shelf 4",
                 "Center"
         };
-//        have toast to say like lowfat milk for 'customizable drinks'
 
         locateFlipper = (ViewFlipper) findViewById(R.id.locateflipper);
         prevButton = (Button) findViewById(R.id.prev_button);
@@ -70,6 +69,7 @@ public class SupplyLocateActivity extends WearableActivity {
             tv.setText(item);
             tv.setTypeface(tf);
             tv.setTextSize(25);
+            tv.setTextColor(Color.parseColor("#FFFFFF"));
             if (item.length() > 9) {
                 tv.setPadding(11, 10, 0, 0);
             } else {
@@ -133,11 +133,6 @@ public class SupplyLocateActivity extends WearableActivity {
         mDotsText[mDotsCurr]
                 .setTextColor(Color.WHITE);
         //Log.i("dots", "coloring dots white");
-
-        if (mDotsCurr == 0) {
-            Toast.makeText(getApplicationContext(), "Low Fat Milk",
-                    Toast.LENGTH_LONG).show();
-        }
 
     }
 

@@ -53,7 +53,7 @@ public class DrinksActivity extends WearableActivity implements View.OnClickList
                 View view = super.getView(position, convertView, parent);
                 TextView tV = (TextView) view.findViewById(android.R.id.text1);
                 tV.setTextColor(Color.parseColor("#FFFFFF"));
-                tV.setTextSize(20);
+                tV.setTextSize(28);
 //                if (position % 2 == 1) {
 //                    view.setBackgroundResource(R.drawable.selector1);
 //                } else
@@ -127,7 +127,9 @@ public class DrinksActivity extends WearableActivity implements View.OnClickList
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String selected = (String) mainView.getItemAtPosition(position);
                 if (selected.equals("   Mocha  ")) {
-                    String[] steps = {"steam milk", "whip milk", "pour coffee", "mix in milk"};
+                    //String[] steps = {"whip milk", "whip milk", "pour coffee", "mix in milk"};
+                    // steps for testing
+                    String[] steps = {"stir milk", "pour stuff", "whip it!", "mix that", "steam that"};
                     Intent intent = new Intent(DrinksActivity.this, RecipeActivity.class);
                     intent.putExtra("steps", steps);
                     startActivity(intent);
