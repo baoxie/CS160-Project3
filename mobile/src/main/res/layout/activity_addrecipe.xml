@@ -1,13 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/colorPrimary">
+
+    <ListView
+        android:layout_width="fill_parent"
+        android:layout_height="500dp"
+        android:id="@+id/recipe_menu_list"
+        android:background="#ffffff" />
+
 
     <Button
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:background="@drawable/static_addrecipe"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true" />
-</RelativeLayout>
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="40dp"
+        android:layout_height="45dp"
+        android:text="+"
+        android:id="@+id/recipe_button"
+        android:layout_gravity="bottom|right"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:textAlignment="gravity"
+        android:layout_margin="5dp" />
+
+
+    <EditText
+        android:layout_width="220dp"
+        android:layout_height="40dp"
+        android:id="@+id/editText2"
+        android:layout_gravity="left|bottom"
+        android:hint="Enter new instr."
+        android:background="#ffffff"
+        android:layout_margin="10dp" />
+
+    <Button
+        android:id="@+id/save_btn2"
+        android:layout_width="55dp"
+        android:layout_height="45dp"
+        android:layout_toLeftOf="@id/recipe_button"
+        android:layout_gravity="right|bottom"
+        android:layout_marginRight="50dp"
+        android:text="Save"
+        android:textSize="12dp"
+        android:layout_marginBottom="5dp" />
+
+    <!--<Button-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="fill_parent"-->
+        <!--android:background="@drawable/static_addrecipe"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_alignParentEnd="true" />-->
+</FrameLayout>

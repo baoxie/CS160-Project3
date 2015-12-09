@@ -20,6 +20,8 @@ import java.net.URL;
 public class TalkToServer extends AsyncTask<String, Void, String> {
 
     // First arg is CRUD METHOD
+    //new TalkToServer().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, "GET", "foods");
+    // new TalkToServer().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, "POST", "drinks", "Very Iced Tea");
     // Second arg is Object Name
     // Third arg, and rest, are object parameters if needed
     protected String doInBackground(String... args) {
