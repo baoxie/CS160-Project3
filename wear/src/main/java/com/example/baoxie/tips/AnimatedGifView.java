@@ -63,10 +63,10 @@ public class AnimatedGifView extends View {
                 gifInputStream = context.getResources().openRawResource(
                         R.raw.stir);
                 break;
-//            case 'shake:
-//                gifInputStream = context.getResources().openRawResource(
-//                        R.raw.shake);
-//                break;
+            case "shake":
+                gifInputStream = context.getResources().openRawResource(
+                        R.raw.shake);
+                break;
             case "pour":
                 gifInputStream = context.getResources().openRawResource(
                         R.raw.pour);

@@ -17,6 +17,7 @@ public class MainActivity extends WearableActivity implements View.OnClickListen
     private ViewFlipper mainMenuFlipper;
     private Button prevButton;
     private Button nextButton;
+    private Button helpButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,7 @@ public class MainActivity extends WearableActivity implements View.OnClickListen
         mainMenuFlipper = (ViewFlipper) findViewById(R.id.mainmenuflipper);
         prevButton = (Button) findViewById(R.id.prev_button);
         nextButton = (Button) findViewById(R.id.next_button);
+        helpButton = (Button) findViewById(R.id.help_button);
 
         prevButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,6 +56,14 @@ public class MainActivity extends WearableActivity implements View.OnClickListen
                 mainMenuFlipper.setInAnimation(inFromRightAnimation());
                 mainMenuFlipper.setOutAnimation(outToLeftAnimation());
                 mainMenuFlipper.showNext();
+            }
+        });
+
+        helpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, QuickHelpActivity.class);
+                startActivity(intent);
             }
         });
 

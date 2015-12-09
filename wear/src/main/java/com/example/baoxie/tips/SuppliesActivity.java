@@ -1,10 +1,12 @@
 package com.example.baoxie.tips;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.wearable.activity.WearableActivity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
@@ -12,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import java.util.ArrayList;
@@ -44,7 +47,22 @@ public class SuppliesActivity extends WearableActivity implements View.OnClickLi
         supplyItems = new ArrayList<String>();
         mainButton = (Button) findViewById(R.id.main_button);
         helpButton = (Button) findViewById(R.id.help_button);
-        listAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,supplyItems);
+        listAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,supplyItems) {
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                View view = super.getView(position, convertView, parent);
+                TextView tV = (TextView) view.findViewById(android.R.id.text1);
+                tV.setTextColor(Color.parseColor("#FFFFFF"));
+                tV.setTextSize(28);
+//                if (position % 2 == 1) {
+//                    view.setBackgroundResource(R.drawable.selector1);
+//                } else
+//                {
+//                    view.setBackgroundResource(R.drawable.selector2);
+//                }
+                return view;
+            }
+        };
         mainView.setAdapter(listAdapter);
 
         // Font path
