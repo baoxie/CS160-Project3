@@ -3,6 +3,8 @@ package com.example.baoxie.tips;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.wearable.activity.WearableActivity;
 import android.util.Log;
@@ -18,7 +20,17 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class DrinksActivity extends WearableActivity implements View.OnClickListener {
@@ -31,6 +43,9 @@ public class DrinksActivity extends WearableActivity implements View.OnClickList
     private ListView mainView;
     private List<String> drinkItems;
     private ArrayAdapter<String> listAdapter;
+
+    private HashMap<String, String> drinksFromServer;
+    private JSONArray responseJson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,9 +150,60 @@ public class DrinksActivity extends WearableActivity implements View.OnClickList
                     startActivity(intent);
                 }
                 if(selected.equals("Espresso")){
-                    String[] drinks = {"   Mocha  ", " Americano", "Cappuccino"};
+
+                    Thread thread = new Thread() {
+                        @Override
+                        public void run() {
+                            try {
+                                String request = "http://107.170.212.70/drinks.json";
+                                URL url = new URL(request);
+                                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                                conn.setRequestMethod("GET");
+                                BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                                String inputLine;
+                                StringBuffer response = new StringBuffer();
+
+                                while ((inputLine = in.readLine()) != null) {
+                                    response.append(inputLine);
+                                }
+                                in.close();
+                                Log.i("GET RESULT", response.toString());
+                                responseJson = new JSONArray(response.toString());
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                Log.i("SERVER", "ERROR 2");
+                            }
+                        }
+                    };
+                    thread.start();
+                    try {
+                        thread.join();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                    for (int i = 0; i < responseJson.length(); i++) {
+                        JSONObject currDrink = null;
+                        try {
+                            currDrink = responseJson.getJSONObject(i);
+                            drinksFromServer.put(currDrink.getString("name"), currDrink.getString("instructions"));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+
+//                    String[] drinks = {"   Mocha  ", " Americano", "Cappuccino"};
+                    String[] drinks = drinksFromServer.keySet().toArray(new String[drinksFromServer.keySet().size()]);
                     Intent intent = new Intent(DrinksActivity.this, DrinksActivity.class);
                     intent.putExtra("drinks", drinks);
+                    startActivity(intent);
+                }
+                else if (drinksFromServer.containsKey(selected)) {
+                    String[] steps = drinksFromServer.get(selected).split("\\r?\\n");
+                    Intent intent = new Intent(DrinksActivity.this, RecipeActivity.class);
+                    intent.putExtra("steps", steps);
                     startActivity(intent);
                 }
 
@@ -204,6 +270,5 @@ public class DrinksActivity extends WearableActivity implements View.OnClickList
         outtoRight.setInterpolator(new AccelerateInterpolator());
         return outtoRight;
     }
-
 }
 
