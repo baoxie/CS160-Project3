@@ -177,10 +177,10 @@ public class RecipeActivity extends WearableActivity implements
                 .setTextColor(Color.WHITE);
         //Log.i("dots", "coloring dots white");
 
-        if (mDotsCurr == 0) {
-            Toast.makeText(getApplicationContext(), "Low Fat Milk",
-                    Toast.LENGTH_SHORT).show();
-        }
+//        if (mDotsCurr == 0) {
+//            Toast.makeText(getApplicationContext(), "Low Fat Milk",
+//                    Toast.LENGTH_SHORT).show();
+//        }
 
                        /* Initialize the sensor. */
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
@@ -211,10 +211,10 @@ public class RecipeActivity extends WearableActivity implements
         mDotsText[mDotsCurr]
                 .setTextColor(Color.WHITE);
         //Log.i("dots", "coloring dots white");
-        if (mDotsCurr == 0) {
-            Toast.makeText(getApplicationContext(), "Low Fat Milk",
-                    Toast.LENGTH_SHORT).show();
-        }
+//        if (mDotsCurr == 0) {
+//            Toast.makeText(getApplicationContext(), "Low Fat Milk",
+//                    Toast.LENGTH_SHORT).show();
+//        }
         return inFromRight;
     }
 

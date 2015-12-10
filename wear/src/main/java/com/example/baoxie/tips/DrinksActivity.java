@@ -32,6 +32,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 public class DrinksActivity extends WearableActivity implements View.OnClickListener {
 
@@ -54,6 +55,7 @@ public class DrinksActivity extends WearableActivity implements View.OnClickList
 
         Intent intent = getIntent();
         final String [] drinks = intent.getStringArrayExtra("drinks");
+        drinksFromServer = (HashMap <String, String>) intent.getSerializableExtra("drinksFromServer");
 
         //submenuFlipper = (ViewFlipper) findViewById(R.id.submenuflipper);
         mainView = (ListView) findViewById((android.R.id.list));
@@ -141,14 +143,23 @@ public class DrinksActivity extends WearableActivity implements View.OnClickList
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String selected = (String) mainView.getItemAtPosition(position);
-                if (selected.equals("   Mocha  ")) {
-                    //String[] steps = {"whip milk", "whip milk", "pour coffee", "mix in milk"};
-                    // steps for testing
-                    String[] steps = {"stir milk", "pour stuff", "whip it!", "mix that", "steam that"};
+                Log.d("Sdf*&*&*&*&*&*&&*&*&*&", selected);
+                Log.d("Sdf*&*&*&*&*&*&&*&*&*&",drinksFromServer.keySet().toString());
+                if (drinksFromServer.containsKey(selected)) {
+                    Log.d("asdadasd", "are you in here?");
+                    String[] steps = drinksFromServer.get(selected).split(",");
                     Intent intent = new Intent(DrinksActivity.this, RecipeActivity.class);
                     intent.putExtra("steps", steps);
                     startActivity(intent);
                 }
+//                if (selected.equals("   Mocha  ")) {
+//                    //String[] steps = {"whip milk", "whip milk", "pour coffee", "mix in milk"};
+//                    // steps for testing
+//                    String[] steps = {"stir milk", "pour stuff", "whip it!", "mix that", "steam that"};
+//                    Intent intent = new Intent(DrinksActivity.this, RecipeActivity.class);
+//                    intent.putExtra("steps", steps);
+//                    startActivity(intent);
+//                }
                 if(selected.equals("Espresso")){
 
                     Thread thread = new Thread() {
@@ -192,21 +203,20 @@ public class DrinksActivity extends WearableActivity implements View.OnClickList
                             e.printStackTrace();
                         }
                     }
+                    Log.d("fdsfsdfs", drinksFromServer.keySet().toString());
+                    Set<String> keys = drinksFromServer.keySet();
+                    for(String i: keys) {
+                        Log.d("Sdfsdfsdf", drinksFromServer.get(i));
+                    }
 
 
-//                    String[] drinks = {"   Mocha  ", " Americano", "Cappuccino"};
+                    //String[] drinks = {"   Mocha  ", " Americano", "Cappuccino"};
                     String[] drinks = drinksFromServer.keySet().toArray(new String[drinksFromServer.keySet().size()]);
                     Intent intent = new Intent(DrinksActivity.this, DrinksActivity.class);
                     intent.putExtra("drinks", drinks);
+                    intent.putExtra("drinksFromServer", drinksFromServer);
                     startActivity(intent);
                 }
-                else if (drinksFromServer.containsKey(selected)) {
-                    String[] steps = drinksFromServer.get(selected).split("\\r?\\n");
-                    Intent intent = new Intent(DrinksActivity.this, RecipeActivity.class);
-                    intent.putExtra("steps", steps);
-                    startActivity(intent);
-                }
-
             }
         });
         //submenuFlipper.setOnClickListener(this);

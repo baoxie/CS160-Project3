@@ -13,6 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import java.util.HashMap;
+
 public class MainActivity extends WearableActivity implements View.OnClickListener {
     private ViewFlipper mainMenuFlipper;
     private Button prevButton;
@@ -84,7 +86,9 @@ public class MainActivity extends WearableActivity implements View.OnClickListen
                     "Tea",
             };
             Intent intent = new Intent(MainActivity.this, DrinksActivity.class);
+            HashMap<String, String> drinksFromServer = new HashMap<>();
             intent.putExtra("drinks", drinks);
+            intent.putExtra("drinksFromServer", drinksFromServer);
             startActivity(intent);
             // get http for list of drinks + new intent for submenu
         } else if (selected.equals("cleaning")) {

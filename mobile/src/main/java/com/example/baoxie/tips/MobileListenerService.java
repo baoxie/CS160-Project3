@@ -37,9 +37,10 @@ public class MobileListenerService extends WearableListenerService {
     @Override
     public void onMessageReceived(MessageEvent messageEvent) {
         Log.i(TAG, "Message to change the picture...");
-        Toast.makeText(getApplicationContext(), "Received notification from watch; you need to restock [product].",
+        Toast.makeText(getApplicationContext(), "Received notification from watch; you need to restock Cups.",
                 Toast.LENGTH_LONG).show();
         if( messageEvent.getPath().equalsIgnoreCase( RESTOCK ) ) {
+            Log.d("TIPS","asldkjalskdj");
             String value = new String(messageEvent.getData(), StandardCharsets.UTF_8);
             restockNotify(value);
         }else{
